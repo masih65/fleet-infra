@@ -4,7 +4,7 @@ metadata:
   name: my-helm-release
   namespace: my-namespace
 spec:
-  interval: 5m
+  interval: 1m
   chart:
     git: my-git-repo
     path: clusters/my-cluster/helmChart-sample-voting-app
