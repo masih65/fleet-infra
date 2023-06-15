@@ -11,12 +11,12 @@ spec:
     ref: main
   values:
     vote:
-    name: vote
-    image: gsmasad/example-voting-app-vote
-    replicaCount: 1
-    service:
-      servicePort: 5000
-      type: LoadBalancer
+      name: vote
+      image: gsmasad/example-voting-app-vote
+      replicaCount: 1
+      service:
+        servicePort: 5000
+        type: LoadBalancer
       
     redis:
       name: redis
