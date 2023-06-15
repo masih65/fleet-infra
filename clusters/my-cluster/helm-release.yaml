@@ -1,8 +1,8 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: my-helm-release
-  namespace: my-namespace
+  name: sample-voting-app
+  namespace: vote
 spec:
   interval: 1m
   chart:
@@ -10,4 +10,40 @@ spec:
     path: clusters/my-cluster/helmChart-sample-voting-app
     ref: main
   values:
-    # Customize your chart values here
+    vote:
+    name: vote
+    image: gsmasad/example-voting-app-vote
+    replicaCount: 1
+    service:
+      servicePort: 5000
+      type: LoadBalancer
+      
+    redis:
+      name: redis
+      image: redis
+      replicaCount: 1
+      service:
+        servicePort: 6379
+        type: ClusterIP
+      
+    result:
+      name: result
+      image: gsmasad/example-voting-app-result
+      replicaCount: 1
+      service:
+        servicePort: 5001
+        type: LoadBalancer
+      
+    db:
+      name: postgres
+      image: postgres:9.4
+      replicaCount: 1
+      service:
+        servicePort: 5432
+        type: ClusterIP
+      
+    worker:
+      name: worker
+      image: gsmasad/example-voting-app-worker
+      replicaCount: 1
+        # Customize your chart values here
