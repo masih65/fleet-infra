@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: db
+  name: db
+  namespace: vote
+spec:
+  type: {{ .Values.db.service.type }}
+  ports:
+  - name: "db-service"
+    port: {{ .Values.db.service.servicePort }}
+    targetPort: 5432
+  selector:
+    app: db
+  

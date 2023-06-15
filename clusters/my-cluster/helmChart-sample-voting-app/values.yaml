@@ -1,0 +1,36 @@
+vote:
+  name: vote
+  image: gsmasad/example-voting-app-vote
+  replicaCount: 1
+  service:
+    servicePort: 5000
+    type: LoadBalancer
+    
+redis:
+  name: redis
+  image: redis
+  replicaCount: 1
+  service:
+    servicePort: 6379
+    type: ClusterIP
+    
+result:
+  name: result
+  image: gsmasad/example-voting-app-result
+  replicaCount: 1
+  service:
+    servicePort: 5001
+    type: LoadBalancer
+    
+db:
+  name: postgres
+  image: postgres:9.4
+  replicaCount: 1
+  service:
+    servicePort: 5432
+    type: ClusterIP
+    
+worker:
+  name: worker
+  image: gsmasad/example-voting-app-worker
+  replicaCount: 1
