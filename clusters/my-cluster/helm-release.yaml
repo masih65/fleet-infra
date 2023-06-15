@@ -1,49 +1,35 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: sample-voting-app
+  name: hello-world
   namespace: vote
 spec:
   interval: 1m
   chart:
     git: my-git-repo
-    path: clusters/my-cluster/helmChart-sample-voting-app
+    path: clusters/my-cluster/hello-world
     ref: main
   values:
-    vote:
-      name: vote
-      image: gsmasad/example-voting-app-vote
-      replicaCount: 1
-      service:
-        servicePort: 5000
-        type: LoadBalancer
-      
-    redis:
-      name: redis
-      image: redis
-      replicaCount: 1
-      service:
-        servicePort: 6379
-        type: ClusterIP
-      
-    result:
-      name: result
-      image: gsmasad/example-voting-app-result
-      replicaCount: 1
-      service:
-        servicePort: 5001
-        type: LoadBalancer
-      
-    db:
-      name: postgres
-      image: postgres:9.4
-      replicaCount: 1
-      service:
-        servicePort: 5432
-        type: ClusterIP
-      
-    worker:
-      name: worker
-      image: gsmasad/example-voting-app-worker
-      replicaCount: 1
-        # Customize your chart values here
+    replicaCount: 1
+
+    image:
+      repository: nginx
+      pullPolicy: IfNotPresent
+      # Overrides the image tag whose default is the chart appVersion.
+      tag: ""
+
+    nameOverride: ""
+    fullnameOverride: ""
+
+    serviceAccount:
+      # Specifies whether a service account should be created
+      create: true
+      # Annotations to add to the service account
+      annotations: {}
+      # The name of the service account to use.
+      # If not set and create is true, a name is generated using the fullname template
+      name: ""
+
+    service:
+      type: ClusterIP
+      port: 80
